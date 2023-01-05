@@ -1,0 +1,465 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 16,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "accuracy_radius_km"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "lengthkm"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": false,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": false
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": false,
+              "style": {
+                "color": {
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.3,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "field": "accuracy_radius_km",
+                  "fixed": 5,
+                  "max": 100,
+                  "min": 1
+                },
+                "symbol": {
+                  "field": "",
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "mode": "auto"
+            },
+            "name": "Layer 1",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "fit",
+          "lat": 0,
+          "lon": 0,
+          "zoom": 12
+        }
+      },
+      "pluginVersion": "9.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "builder",
+          "expr": "{application=\"geoip-loki\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Bans",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "source": "Line"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Line": true,
+              "id": true,
+              "labels": true,
+              "tsNs": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 4,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": ["value"]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": ["count"],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "builder",
+          "expr": "{application=\"geoip-loki\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "By country",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "json",
+            "source": "Line"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Line": true,
+              "Time": true,
+              "accuracy_radius_km": true,
+              "city": true,
+              "continent": true,
+              "id": true,
+              "ip_address": false,
+              "labels": true,
+              "lat": true,
+              "lon": true,
+              "tsNs": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "Count ($country)": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "Count (country)": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "country": {
+                "aggregations": ["count"],
+                "operation": "groupby"
+              },
+              "country 2": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "ip_address": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "lon": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              }
+            }
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 5,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": ["value"]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": ["count"],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "builder",
+          "expr": "{application=\"geoip-loki\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "By region",
+      "transformations": [
+        {
+          "id": "extractFields",
+          "options": {
+            "format": "json",
+            "source": "Line"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Line": true,
+              "Time": true,
+              "accuracy_radius_km": true,
+              "city": true,
+              "continent": false,
+              "country": true,
+              "id": true,
+              "ip_address": false,
+              "labels": true,
+              "lat": true,
+              "lon": true,
+              "tsNs": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Count": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "Count ($country)": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "Count (country)": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "continent": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "country": {
+                "aggregations": ["count"],
+                "operation": "groupby"
+              },
+              "country 2": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "ip_address": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              },
+              "lon": {
+                "aggregations": ["count"],
+                "operation": "aggregate"
+              }
+            }
+          }
+        }
+      ],
+      "type": "piechart"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "fail2ban",
+  "uid": "aylEjmh4z",
+  "version": 6,
+  "weekStart": ""
+}
