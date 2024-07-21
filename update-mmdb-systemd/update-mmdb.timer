@@ -1,0 +1,8 @@
+[Unit]
+Description=Get latest MMDB
+
+[Timer]
+OnCalendar=Mon *-*-* 00:00:00
+
+[Install]
+WantedBy=timers.target

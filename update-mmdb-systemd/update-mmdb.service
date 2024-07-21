@@ -1,0 +1,9 @@
+[Unit]
+Description=Get latest MMDB
+
+[Service]
+Type=oneshot
+ExecStart=curl -fsSL -u ${MAXMIND_ID}:${MAXMIND_LICENSE_KEY} https://download.maxmind.com/geoip/databases/GeoLite2-City/download?suffix=tar.gz -o download.tar.gz
+ExecStartPost=tar xzf download.tar.gz --strip-components=1
+ExecStartPost=rm download.tar.gz
+WorkingDirectory=/data/geoip-loki/data/
