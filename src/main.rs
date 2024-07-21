@@ -39,7 +39,7 @@ pub struct LokiStreams {
 
 fn main() {
     let options = Opts::parse();
-    let timestamp = Local::now().timestamp_nanos();
+    let timestamp = Local::now().timestamp_nanos_opt().unwrap();
     let labels: HashMap<String, String> = HashMap::from_iter([
         ("application".to_owned(), env!("CARGO_PKG_NAME").to_owned()),
         ("level".to_owned(), "info".to_owned()),
